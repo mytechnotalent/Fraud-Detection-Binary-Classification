@@ -10,45 +10,37 @@ License: No license information was provided.
 
 ### **Objective**
 
-This report presents the development and evaluation of a binary classification model designed to analyze patterns in demographic, health, and occupational data to predict health-related outcomes. Using a dataset with variables like age, work hours, physical activity hours, and various health indicators, the model aims to uncover associations within the data, focusing on insights into demographic and occupational impacts on health and stress factors.
+This report presents an analysis of demographic and occupational data focusing on income distribution across professions. Using visualizations and a basic binary classification model, we aimed to explore any patterns or associations within this dataset.
 
 ### **Data Insights**
 
-**1. Continuous Variables Analysis**
-- **Age, Sleep Hours, and Work Hours Distributions:** Histograms of these variables show an approximately even spread without strong skewness, suggesting no notable clustering around specific values. The distributions are largely uniform, indicating a balanced representation across different ranges.
-- **Relationships Among Continuous Variables:** Scatter plots of Sleep_Hours versus Age, faceted by Occupation, display mostly flat trend lines, indicating weak or no correlation between Age and Sleep_Hours across occupations. The pair plot for continuous variables such as Age, Sleep_Hours, Work_Hours, and Physical_Activity_Hours confirms minimal interdependence, as no clear patterns or linear relationships are visible.
-- **Correlation Matrix:** A correlation matrix corroborates the lack of strong associations among continuous variables, with all correlation values close to zero, suggesting that these features are largely independent.
+**1. Income Distribution Analysis**
+- **Income Distribution:** The histogram with KDE line shows a marginal distribution of income ranging from 0 to 100,000. This distribution is relatively uniform, with consistent counts across income intervals. The smooth, flat KDE line reflects this uniformity, indicating no significant clustering or peaks, which suggests that income is evenly spread throughout the dataset.
 
-**2. Categorical Variables Analysis**
-- **Gender, Occupation, Country, and Severity Distributions:** Bar charts display balanced representations across gender categories, varied occupational groups, and even distribution across countries like the USA, Canada, Australia, and the UK. Severity levels are diverse, with “Low” severity most common, followed by “Medium” and “High.”
-- **Consultation History and Stress Level:** Consultation_History and Stress_Level both show balanced distributions, with a slight tendency toward "Medium" stress levels over "Low" and "High." This balanced distribution could indicate varied but proportionate experiences across these factors.
-- **Interrelationships:** Heatmaps reveal demographic and health patterns, with specific gender and occupation combinations showing higher counts in certain categories. Occupational patterns differ across regions, with healthcare workers represented across severity levels and specific occupations showing distinct stress level distributions.
+**2. Profession Distribution Analysis**
+- **Profession Counts:** The bar chart illustrates similar counts across the professions of doctors, lawyers, and engineers, with a slightly higher count for doctors, followed by lawyers and then engineers. This balance indicates a well-represented sample across these professions, allowing for fair comparison of characteristics within these groups.
 
-**3. Advanced Visualizations**
-- **Demographic and Health Patterns:** The bar charts illustrate interactions between Gender, Occupation, and other demographic factors, indicating that each group displays varied counts across categories, reflecting a diverse sample. Occupation is analyzed against factors like Country and Stress Level, highlighting representation in specific work sectors across health factors.
-- **Continuous Variable Comparisons:** Box plots of Age, Sleep Hours, Work Hours, and Physical Activity Hours across Gender, Occupation, and Country show similar distributions with overlapping ranges and median values. This uniformity suggests that these continuous measures do not significantly vary based on demographic categories, showing consistency within the dataset.
+**3. Income by Profession Analysis**
+- **Income Comparison Across Professions:** Box plots show similar median income levels across doctors, lawyers, and engineers, with wide interquartile ranges, suggesting variability within each profession but comparable medians. The error bar plot further supports this, with mean incomes closely aligned and overlapping confidence intervals, suggesting minimal differences in average income between professions.
 
 ### **Model Development and Selection**
 
 **Model Evaluation**
-- **Best Model:** Model 3 achieved an accuracy of 50.3% and an ROC AUC of 49.1%, indicating near-random performance. Despite this, certain statistically significant variables were identified, such as:
-  - **Geographic and Occupational Influence:** Interactions like `C(Occupation)[T.IT]:C(Country)[T.Germany]` (coefficient: -3.8900, p-value: 0.0297) and `C(Occupation)[T.Engineering]:C(Country)[T.India]` (coefficient: 3.4107, p-value: 0.0307).
-  - **Physical and Work Activity:** Physical_Activity_Hours (coefficient: 38.5331, p-value: 0.0357) shows a positive association, while polynomial terms involving Work_Hours and Physical_Activity_Hours exhibit mixed directions. These significant coefficients highlight potential areas for further exploration despite the model's limited predictive power.
+- **Model Performance:** The selected model achieved an accuracy of 51.35% and an ROC AUC of 51.03%, barely above random guessing, indicating limited predictive utility. The model included six coefficients, but only one—specifically the profession category "Engineer"—was statistically significant, with a coefficient of -0.1740 (p-value = 0.0075), suggesting a slight negative association with the target variable. The use of higher-order terms for income did not yield significant results, underscoring the model's lack of predictive strength.
 
 ### **Implications**
 
-Although the selected model demonstrates limited predictive accuracy with its accuracy and ROC AUC close to chance levels, the identification of significant terms related to occupation, geographic location, and physical activity provides potential insights into demographic and occupational impacts on health factors. These findings could inform more targeted analyses or guide data collection strategies to enhance model performance.
+The model’s near-random performance underscores its limited practical application, as it fails to provide meaningful predictions or insights. The analysis of income distribution by profession suggests minimal variation across professional categories, and the model’s lack of robust predictive power further confirms that these features do not strongly differentiate the target outcome.
 
 ### **Recommendations and Next Steps**
 
-1. **Improve Model Accuracy:** Consider alternative modeling approaches or additional feature engineering to improve predictive power.
-2. **Investigate Feature Interactions:** Conduct deeper analyses on interaction terms involving demographic and occupational variables to better understand their impacts.
-3. **Address Model Limitations:** Explore methods to handle near-random model performance, possibly by balancing the dataset or testing other algorithms.
-4. **Expand Data Collection:** To enhance predictive accuracy, include more health-related or lifestyle features to capture a broader range of influences.
+1. **Improvement of Model Features:** Consider including additional relevant demographic or lifestyle variables to enhance predictive power.
+2. **Alternative Modeling Approaches:** Explore other algorithms that may be more suited to uncovering subtle relationships within this dataset.
+3. **Avoid Practical Application:** Due to its low accuracy and ROC AUC, this model should not be used for any decision-making processes.
 
 ### **Conclusion**
 
-This analysis underscores the importance of data exploration in uncovering demographic and health-related patterns. While the model’s predictive accuracy is limited, significant terms related to occupation, country, and physical activity provide a foundation for further exploration. With refined feature selection and additional data, this model could contribute to identifying and understanding health risk factors across populations. This model should **NEVER** be used in production due to its extremely poor accuracy and ROC AUC scores.
+This analysis indicates that the current dataset lacks substantial variation in income distribution across the professions of doctors, lawyers, and engineers. The selected model’s low accuracy and ROC AUC further confirm that it is unsuitable for predictive applications. Future analyses with additional features and more refined modeling techniques are recommended. **This model should never be used in production due to its poor predictive performance.**
 
 ## Import Main Modules & Dataset
 
